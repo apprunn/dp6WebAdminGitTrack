@@ -1,0 +1,17 @@
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = tab
+indent_size = 2
+
+# 2 tabs indentation
+[*.{js, css, html, php}]
+charset = utf-8
+
+# Matches the exact files either package.json or .travis.yml
+[{package.json,.config.yml}]
+indent_style = tab
+indent_size = 2
