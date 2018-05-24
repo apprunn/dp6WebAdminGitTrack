@@ -102,7 +102,7 @@ export default {
 	},
 };
 </script>
-<style>
+<style lang="scss" scoped>
   .custom-loader {
     animation: loader 1s infinite;
     display: flex;
