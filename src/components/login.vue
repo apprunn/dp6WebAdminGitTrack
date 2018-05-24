@@ -23,15 +23,19 @@
     </v-btn>
     <v-btn @click="clear">clear</v-btn>
   </v-form>
+	 <v-alert :value="true" type="error" color="red" v-if="message">
+      {{mesageText}}
+    </v-alert>
  </v-container>	
 </template>
 
 <script>
-import axios from 'axios';
 
 function data() {
 	return {
 		valid: true,
+		message: false,
+		mesageText: '',
 		name: '',
 		email: '',
 		emailRules: [
@@ -46,16 +50,25 @@ function data() {
 }
 
 function submit() {
-	axios.post('http://devacl.japisale.com/api/authenticate', {
-		email: this.email,
-		password: this.password,
-		codeApp: 'git',
-		tokenDevice: '',
-	})
-		.then((response) => {
-			localStorage.token = response.data.token;
+	const url = 'authenticate';
+	this.$http
+		.post(url, {
+			email: this.email,
+			password: this.password,
+			codeApp: 'git',
+			tokenDevice: '',
 		})
-		.catch(() => {
+		.then((response) => {
+			this.message = false;
+			localStorage.setItem('token', response.data.token);
+		})
+		.catch((error) => {
+			this.message = true;
+			if (error.response.status === 405) {
+				this.mesageText = error.response.data.message;
+			} else {
+				this.mesageText = error.response.data.email[0];
+			}
 		});
 }
 
@@ -72,7 +85,3 @@ export default {
 	},
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" scoped>
-</style>
