@@ -54,6 +54,7 @@ function showMessage() {
 }
 
 function submit() {
+	this.valid = false;
 	const url = 'authenticate';
 	this.$http
 		.post(url, {
