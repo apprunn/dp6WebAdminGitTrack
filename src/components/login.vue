@@ -44,9 +44,7 @@ function data() {
 	};
 }
 
-function submit() {
-	alert('hola');
-}
+function submit() {}
 
 function clear() {
 	this.$refs.form.reset();
@@ -64,8 +62,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-h1 {
-	color: map-get($colors, red);
-	font-size: em(32);
-}
 </style>
