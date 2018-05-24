@@ -16,8 +16,10 @@
     ></v-text-field>
     <v-btn
       :disabled="!valid"
+			:loading="loading"
 			color="green"
 			type="submit"
+			class="white--text"
     >
       submit
     </v-btn>
@@ -33,7 +35,9 @@
 
 function data() {
 	return {
+		loading: false,
 		valid: true,
+		loader: null,
 		message: false,
 		messageText: '',
 		name: '',
@@ -55,6 +59,7 @@ function showMessage() {
 
 function submit() {
 	this.valid = false;
+	this.loading = true;
 	const url = 'authenticate';
 	this.$http
 		.post(url, {
@@ -66,10 +71,12 @@ function submit() {
 		.then((response) => {
 			this.messageText = '';
 			this.valid = false;
+			this.loading = false;
 			localStorage.setItem('token', response.data.token);
 		})
 		.catch((error) => {
 			this.valid = true;
+			this.loading = false;
 			if (error.response.status === 405) {
 				this.messageText = error.response.data.message;
 			} else {
@@ -80,6 +87,7 @@ function submit() {
 
 function clear() {
 	this.$refs.form.reset();
+	this.messageText = '';
 }
 
 
@@ -94,3 +102,41 @@ export default {
 	},
 };
 </script>
+<style>
+  .custom-loader {
+    animation: loader 1s infinite;
+    display: flex;
+  }
+  @-moz-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-o-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
