@@ -8,7 +8,7 @@ indent_style = tab
 indent_size = 2
 
 # 2 tabs indentation
-[*.{js, css, html, php}]
+[*.{js, css, html, php, vue}]
 charset = utf-8
 
 # Matches the exact files either package.json or .travis.yml
