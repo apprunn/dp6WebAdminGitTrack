@@ -23,8 +23,8 @@
     </v-btn>
     <v-btn @click="clear">clear</v-btn>
   </v-form>
-	 <v-alert :value="true" type="error" color="red" v-if="message">
-      {{mesageText}}
+	 <v-alert :value="true" type="error" color="red" v-if="showMessage">
+      {{messageText}}
     </v-alert>
  </v-container>	
 </template>
@@ -35,7 +35,7 @@ function data() {
 	return {
 		valid: true,
 		message: false,
-		mesageText: '',
+		messageText: '',
 		name: '',
 		email: '',
 		emailRules: [
@@ -49,6 +49,10 @@ function data() {
 	};
 }
 
+function showMessage() {
+	return this.messageText.length > 0;
+}
+
 function submit() {
 	const url = 'authenticate';
 	this.$http
@@ -59,15 +63,16 @@ function submit() {
 			tokenDevice: '',
 		})
 		.then((response) => {
-			this.message = false;
+			this.messageText = '';
+			this.valid = false;
 			localStorage.setItem('token', response.data.token);
 		})
 		.catch((error) => {
-			this.message = true;
+			this.valid = true;
 			if (error.response.status === 405) {
-				this.mesageText = error.response.data.message;
+				this.messageText = error.response.data.message;
 			} else {
-				this.mesageText = error.response.data.email[0];
+				this.messageText = error.response.data.email[0];
 			}
 		});
 }
@@ -82,6 +87,9 @@ export default {
 	methods: {
 		submit,
 		clear,
+	},
+	computed: {
+		showMessage,
 	},
 };
 </script>
