@@ -1,6 +1,6 @@
 <template>
   <v-container>
-		<v-form ref="form" v-model="valid">
+		<v-form @submit.prevent="submit" ref="form" v-model="valid">
     <v-text-field
       v-model="email"
       :rules="emailRules"
@@ -16,8 +16,8 @@
     ></v-text-field>
     <v-btn
       :disabled="!valid"
-      @click="submit"
 			color="green"
+			type="submit"
     >
       submit
     </v-btn>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 function data() {
 	return {
@@ -44,7 +45,19 @@ function data() {
 	};
 }
 
-function submit() {}
+function submit() {
+	axios.post('http://devacl.japisale.com/api/authenticate', {
+		email: this.email,
+		password: this.password,
+		codeApp: 'git',
+		tokenDevice: '',
+	})
+		.then((response) => {
+			localStorage.token = response.data.token;
+		})
+		.catch(() => {
+		});
+}
 
 function clear() {
 	this.$refs.form.reset();
