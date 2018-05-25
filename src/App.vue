@@ -12,6 +12,7 @@ export default {
 
 <style lang="scss">
 html {
-	font-size: 16px;
+	font-family: 'Roboto';
+	font-size: 20px;
 }
 </style>

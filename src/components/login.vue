@@ -1,6 +1,6 @@
 <template>
   <v-container>
-		<v-form ref="form" v-model="valid">
+		<v-form @submit.prevent="submit" ref="form" v-model="valid">
     <v-text-field
       v-model="email"
       :rules="emailRules"
@@ -16,21 +16,30 @@
     ></v-text-field>
     <v-btn
       :disabled="!valid"
-      @click="submit"
+			:loading="loading"
 			color="green"
+			type="submit"
+			class="white--text"
     >
       submit
     </v-btn>
     <v-btn @click="clear">clear</v-btn>
   </v-form>
- </v-container>	
+	 <v-alert :value="true" type="error" color="red" v-if="showMessage">
+      {{messageText}}
+    </v-alert>
+ </v-container>
 </template>
 
 <script>
 
 function data() {
 	return {
+		loading: false,
 		valid: true,
+		loader: null,
+		message: false,
+		messageText: '',
 		name: '',
 		email: '',
 		emailRules: [
@@ -44,10 +53,36 @@ function data() {
 	};
 }
 
-function submit() {}
+function showMessage() {
+	return this.messageText.length > 0;
+}
+
+async function submit() {
+	this.loading = true;
+	const url = 'authenticate';
+	try {
+		const response = await this.$http.post(url, {
+			email: this.email,
+			password: this.password,
+			codeApp: 'git',
+			tokenDevice: '',
+		});
+		this.messageText = '';
+		localStorage.setItem('token', response.data.token);
+	} catch (error) {
+		if (error.response.status === 405) {
+			this.messageText = error.response.data.message;
+		} else {
+			this.messageText = error.response.data.email[0];
+		}
+	} finally {
+		this.loading = false;
+	}
+}
 
 function clear() {
 	this.$refs.form.reset();
+	this.messageText = '';
 }
 
 
@@ -57,9 +92,46 @@ export default {
 		submit,
 		clear,
 	},
+	computed: {
+		showMessage,
+	},
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+  .custom-loader {
+    animation: loader 1s infinite;
+    display: flex;
+  }
+  @-moz-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-o-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 </style>

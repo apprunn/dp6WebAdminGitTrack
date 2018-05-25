@@ -7,7 +7,7 @@ import App from './App';
 import router from './router';
 
 const instance = axios.create({
-	baseURL: process.env.URL,
+	baseURL: process.env.ACL_URL,
 });
 
 Vue.use(Vuetify);
