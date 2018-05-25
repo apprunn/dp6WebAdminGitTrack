@@ -29,15 +29,6 @@
           <v-list-tile slot="activator">
             <v-list-tile-title>sub-1</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile
-            v-for="(admin, i) in admins"
-            :key="i"
-          >
-            <v-list-tile-title v-text="admin[0]"></v-list-tile-title>
-            <v-list-tile-action>
-              <v-icon v-text="admin[1]"></v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
         </v-list-group>
         <v-list-group
           sub-group
@@ -45,15 +36,6 @@
         >
           <v-list-tile slot="activator">
             <v-list-tile-title>sub-2</v-list-tile-title>
-          </v-list-tile>
-          <v-list-tile
-            v-for="(crud, i) in cruds"
-            :key="i"
-          >
-            <v-list-tile-title v-text="crud[0]"></v-list-tile-title>
-            <v-list-tile-action>
-              <v-icon v-text="crud[1]"></v-icon>
-            </v-list-tile-action>
           </v-list-tile>
         </v-list-group>
       </v-list-group>
