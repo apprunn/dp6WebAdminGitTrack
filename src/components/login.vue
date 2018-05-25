@@ -28,7 +28,7 @@
 	 <v-alert :value="true" type="error" color="red" v-if="showMessage">
       {{messageText}}
     </v-alert>
- </v-container>	
+ </v-container>
 </template>
 
 <script>
@@ -57,32 +57,27 @@ function showMessage() {
 	return this.messageText.length > 0;
 }
 
-function submit() {
-	this.valid = false;
+async function submit() {
 	this.loading = true;
 	const url = 'authenticate';
-	this.$http
-		.post(url, {
+	try {
+		const response = await this.$http.post(url, {
 			email: this.email,
 			password: this.password,
 			codeApp: 'git',
 			tokenDevice: '',
-		})
-		.then((response) => {
-			this.messageText = '';
-			this.valid = false;
-			this.loading = false;
-			localStorage.setItem('token', response.data.token);
-		})
-		.catch((error) => {
-			this.valid = true;
-			this.loading = false;
-			if (error.response.status === 405) {
-				this.messageText = error.response.data.message;
-			} else {
-				this.messageText = error.response.data.email[0];
-			}
 		});
+		this.messageText = '';
+		localStorage.setItem('token', response.data.token);
+	} catch (error) {
+		if (error.response.status === 405) {
+			this.messageText = error.response.data.message;
+		} else {
+			this.messageText = error.response.data.email[0];
+		}
+	} finally {
+		this.loading = false;
+	}
 }
 
 function clear() {

@@ -7,7 +7,7 @@ import App from './App';
 import router from './router';
 
 const instance = axios.create({
-	baseURL: 'http://devacl.japisale.com/api/',
+	baseURL: process.env.ACL_URL,
 });
 
 Vue.use(Vuetify);
