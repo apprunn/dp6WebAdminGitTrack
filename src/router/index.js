@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from '@/components/Home';
 import login from '@/components/login';
 import templates from '@/components/templates';
+import issue from '@/components/issue';
 
 Vue.use(Router);
 
@@ -23,6 +24,11 @@ export default new Router({
 			path: '/templates/new',
 			name: 'templates',
 			component: templates,
+		},
+		{
+			path: '/issue/new',
+			name: 'issue',
+			component: issue,
 		},
 	],
 });
