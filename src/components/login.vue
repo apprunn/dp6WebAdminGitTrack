@@ -69,6 +69,7 @@ async function submit() {
 		});
 		this.messageText = '';
 		localStorage.setItem('token', response.data.token);
+		this.$router.push({ name: 'Home' });
 	} catch (error) {
 		if (error.response.status === 405) {
 			this.messageText = error.response.data.message;
