@@ -61,7 +61,7 @@ async function submit() {
 	this.loading = true;
 	const url = 'authenticate';
 	try {
-		const response = await this.$http.post(url, {
+		const response = await this.$httpAcl.post(url, {
 			email: this.email,
 			password: this.password,
 			codeApp: 'git',
