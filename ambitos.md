@@ -1,7 +1,7 @@
 1. (PRO)
 
 ```bash
-Projects, milestones, activities
+Projects, milestones, activities, developers
 ```
 
 2. (ACL)
