@@ -23,7 +23,6 @@ async function created() {
 		headers: { Authorization: `Bearer ${token}` },
 	});
 	this.resultsDeveloper = responseDeveloper.data;
-	console.log(this.resultsDeveloper);
 }
 
 function data() {
