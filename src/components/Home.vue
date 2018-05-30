@@ -85,8 +85,4 @@ export default {
 	.sub-item {
 		margin-left: 30px;
 	}
-
-	.pr {
-		height: auto !important;
-	}
 </style>
