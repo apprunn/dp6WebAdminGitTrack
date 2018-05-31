@@ -16,8 +16,9 @@
       			</v-list-group>
     			</v-list>
   			</v-navigation-drawer>
-		 	</v-flex>	
-	 	</v-layout>	 
+		 	</v-flex>
+	 	</v-layout>
+		<slot></slot>
  </v-container>
 </template>
 
@@ -44,6 +45,7 @@ function data() {
 	};
 }
 export default {
+	name: 'layout-admin',
 	data,
 	created,
 	methods: {

@@ -1,37 +1,41 @@
 <template>
-  <v-container>
-		<v-form @submit.prevent="submit" ref="form" v-model="valid">
-    <v-text-field
-      v-model="email"
-      :rules="emailRules"
-      label="E-mail"
-      required
-    ></v-text-field>
-		<v-text-field
-      v-model="password"
-			type ="password"
-      label="Password"
-			 :rules="passwordRules"
-      required
-    ></v-text-field>
-    <v-btn
-      :disabled="!valid"
-			:loading="loading"
-			color="green"
-			type="submit"
-			class="white--text"
-    >
-      submit
-    </v-btn>
-    <v-btn @click="clear">clear</v-btn>
-  </v-form>
-	 <v-alert :value="true" type="error" color="red" v-if="showMessage">
-      {{messageText}}
-    </v-alert>
- </v-container>
+	<layout-login>
+		<v-container>
+			<v-form @submit.prevent="submit" ref="form" v-model="valid">
+			<v-text-field
+				v-model="email"
+				:rules="emailRules"
+				label="E-mail"
+				required
+			></v-text-field>
+			<v-text-field
+				v-model="password"
+				type ="password"
+				label="Password"
+				:rules="passwordRules"
+				required
+			></v-text-field>
+			<v-btn
+				:disabled="!valid"
+				:loading="loading"
+				color="green"
+				type="submit"
+				class="white--text"
+			>
+				submit
+			</v-btn>
+			<v-btn @click="clear">clear</v-btn>
+		</v-form>
+		<v-alert :value="true" type="error" color="red" v-if="showMessage">
+				{{messageText}}
+			</v-alert>
+	</v-container>
+	</layout-login>
 </template>
 
 <script>
+
+import layoutLogin from '@/layouts/layout-login';
 
 function data() {
 	return {
@@ -89,6 +93,9 @@ function clear() {
 
 export default {
 	data,
+	components: {
+		layoutLogin,
+	},
 	methods: {
 		submit,
 		clear,

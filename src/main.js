@@ -5,6 +5,7 @@ import axios from 'axios';
 import 'normalize.css';
 import App from './App';
 import router from './router';
+import layoutAdmin from './layouts/layout-admin';
 
 const instanceAcl = axios.create({
 	baseURL: process.env.ACL_URL,
@@ -18,6 +19,7 @@ Vue.use(Vuetify);
 Vue.prototype.$httpAcl = instanceAcl;
 Vue.prototype.$http = instance;
 Vue.config.productionTip = false;
+Vue.component('layout-admin', layoutAdmin);
 
 /* eslint-disable no-new */
 new Vue({
