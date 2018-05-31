@@ -1,8 +1,15 @@
 <template>
  	<v-container :fluid="true" pl-0 pt-0 pr-0 pb-0>
+		 <v-toolbar>
+				<v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+				<v-spacer></v-spacer>
+					<v-toolbar-items>
+						<v-btn flat>{{codigo}}</v-btn>
+					</v-toolbar-items>
+    	</v-toolbar>
 	 	<v-layout row wrap>
-		 	<v-flex xs8 md3>
-			 <v-navigation-drawer stateless value="true" class="blue lighten-3 height">
+		 	<v-flex xs7 md3>
+			 <v-navigation-drawer stateless value="true" class="blue lighten-3 height"  v-model="drawer">
     			<v-list v-for="result in results" :key="result.id">
 			 			<v-list-group value="true">
         			<v-list-tile slot="activator">
@@ -17,8 +24,8 @@
     			</v-list>
   			</v-navigation-drawer>
 		 	</v-flex>
+			<slot></slot>
 	 	</v-layout>
-		<slot></slot>
  </v-container>
 </template>
 
@@ -42,6 +49,8 @@ function option(value) {
 function data() {
 	return {
 		results: [],
+		drawer: null,
+		codigo: localStorage.getItem('codigo'),
 	};
 }
 export default {

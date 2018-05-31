@@ -73,6 +73,7 @@ async function submit() {
 		});
 		this.messageText = '';
 		localStorage.setItem('token', response.data.token);
+		localStorage.setItem('codigo', response.data.codeUser);
 		this.$router.push({ name: 'Home' });
 	} catch (error) {
 		if (error.response.status === 405) {
