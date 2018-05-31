@@ -7,7 +7,12 @@
           <v-btn flat>{{codeUser}}</v-btn>
       	</v-toolbar-items>
     </v-toolbar>
-    <v-navigation-drawer v-model="drawer" temporary absolute class="blue lighten-3">
+    <v-navigation-drawer 
+			v-model="drawer" 
+			temporary 
+			absolute 
+			class="blue lighten-3"
+		>
 			<v-list v-for="result in results" :key="result.id">
 				<v-list-group value="true">
 					<v-list-tile slot="activator">
