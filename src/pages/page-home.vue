@@ -2,13 +2,13 @@
  	<layout-admin>
 		 {{routes}}
 		  <v-breadcrumbs divider="/">
-			<v-breadcrumbs-item to="/" router>Home</v-breadcrumbs-item>
+			<v-breadcrumbs-item to="/">Home</v-breadcrumbs-item>
 					<v-breadcrumbs-item 
-         v-for="item in array"
-				 :key="item"
-				 :to="item"
+         v-for="element in arrayRoutes"
+				 :key="element"
+				 :to="element"
 			>
-        {{ item }}
+        {{ nameRoutes(element) }}
       </v-breadcrumbs-item>
     </v-breadcrumbs>
 		 <router-view></router-view>
@@ -18,12 +18,23 @@
 <script>
 
 function routes() {
-	this.array = this.$route.path.slice(1).split('/');
+	this.arrayRoutes = this.$route.path.slice(1).split('/');
+}
+
+function nameRoutes(value) {
+	let name;
+	if (value === 'developers') {
+		name = 'Developers';
+	}
+	if (value === 'projects') {
+		name = 'Projects';
+	}
+	return name;
 }
 
 function data() {
 	return {
-		array: [],
+		arrayRoutes: [],
 	};
 }
 
@@ -32,6 +43,9 @@ export default {
 	data,
 	computed: {
 		routes,
+	},
+	methods: {
+		nameRoutes,
 	},
 };
 </script>
