@@ -1,5 +1,6 @@
 <template>
  	<layout-admin>
+		 {{routes}}
 		  <v-breadcrumbs divider="/">
 			<v-breadcrumbs-item to="/" router>Home</v-breadcrumbs-item>
 					<v-breadcrumbs-item 
@@ -16,11 +17,6 @@
 
 <script>
 
-
-function ruta() {
-	return this.$route.path;
-}
-
 function routes() {
 	this.array = this.$route.path.slice(1).split('/');
 }
@@ -35,7 +31,6 @@ export default {
 	name: 'page-home',
 	data,
 	computed: {
-		ruta,
 		routes,
 	},
 };
