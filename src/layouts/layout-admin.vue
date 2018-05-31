@@ -4,7 +4,7 @@
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <v-spacer></v-spacer>
           <v-toolbar-items>
-            <v-btn flat>{{codigo}}</v-btn>
+            <v-btn flat>{{codeUser}}</v-btn>
           </v-toolbar-items>
       </v-toolbar>
     	<v-navigation-drawer v-model="drawer" temporary absolute class="blue lighten-3">
@@ -46,7 +46,7 @@ function data() {
 	return {
 		results: [],
 		drawer: null,
-		codigo: localStorage.getItem('codigo'),
+		codeUser: localStorage.getItem('code-user'),
 	};
 }
 export default {
