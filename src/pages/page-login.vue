@@ -1,7 +1,11 @@
 <template>
 	<layout-login>
 		<v-container>
-			<v-form @submit.prevent="submit" ref="form" v-model="valid">
+			<v-form 
+				@submit.prevent="submit" 
+				ref="form" 
+				v-model="valid"
+			>
 			<v-text-field
 				v-model="email"
 				:rules="emailRules"
@@ -26,7 +30,12 @@
 			</v-btn>
 			<v-btn @click="clear">clear</v-btn>
 		</v-form>
-		<v-alert :value="true" type="error" color="red" v-if="showMessage">
+		<v-alert 
+			:value="true" 
+			type="error" 
+			color="red" 
+			v-if="showMessage"
+			>
 				{{messageText}}
 			</v-alert>
 	</v-container>
