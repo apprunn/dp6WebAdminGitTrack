@@ -1,10 +1,12 @@
 <template>
   <v-layout row>
     <v-flex xs12 sm6 offset-sm3>
-				<v-list-tile v-for="project in projects" :key="project.id">
+				<v-list-tile v-for="project in projects" :key="project.id" class="container">
 					<v-list-tile-content>
             <v-list-tile-title>{{project.gitName}}</v-list-tile-title>
-          </v-list-tile-content>
+						 <v-list-tile-sub-title>Activity Hours: {{project.activityHours}} h</v-list-tile-sub-title>
+						  <v-list-tile-sub-title>Milestone Hours: {{project.milestoneHours}} h</v-list-tile-sub-title>
+					</v-list-tile-content>
 				</v-list-tile>
     </v-flex>
   </v-layout>
@@ -31,3 +33,10 @@ export default {
 	created,
 };
 </script>
+
+<style lang="scss" scoped>
+	.container {
+		height: 80px !important;
+		padding: 0 !important;
+	}
+</style>
