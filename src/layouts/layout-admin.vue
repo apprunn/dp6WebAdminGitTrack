@@ -45,6 +45,10 @@ function option(value) {
 	if (value === 'Lista de desarrolladores') {
 		this.$router.push({ name: 'developers' });
 	}
+
+	if (value === 'Lista de proyectos') {
+		this.$router.push({ name: 'projects' });
+	}
 }
 
 function data() {
