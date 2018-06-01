@@ -15,7 +15,7 @@
  	</layout-admin>
 </template>
 
-
+<script>
 function routes() {
 	this.arrayRoutes = this.$route.path.slice(1).split('/');
 }
