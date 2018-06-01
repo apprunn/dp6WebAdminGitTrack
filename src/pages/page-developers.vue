@@ -1,7 +1,7 @@
 <template>
 		<v-container :fluid="true" pl-0 pt-0 pr-0 pb-0>
 			<v-progress-linear
-    		v-model="value"
+    	 	:indeterminate="true"
     		:active="show"
 				class="progress"
   		></v-progress-linear>
@@ -26,7 +26,6 @@ async function created() {
 	const responseDeveloper = await this.$http.get(urlDeveloper, {
 		headers: { Authorization: `Bearer ${token}` },
 	});
-	this.value = 100;
 	this.developers = responseDeveloper.data;
 	this.show = false;
 }
@@ -34,7 +33,6 @@ function data() {
 	return {
 		developers: [],
 		show: false,
-		value: 0,
 	};
 }
 export default {
