@@ -55,3 +55,4 @@ export default {
     margin-bottom: 60px;
 	}
 </style>
+
