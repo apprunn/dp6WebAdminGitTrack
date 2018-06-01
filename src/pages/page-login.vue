@@ -4,7 +4,8 @@
 			<v-form 
 				@submit.prevent="submit" 
 				ref="form" 
-				v-model="valid">
+				v-model="valid"
+			>
 			<v-text-field
 				v-model="email"
 				:rules="emailRules"
