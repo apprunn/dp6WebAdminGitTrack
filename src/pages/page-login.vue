@@ -1,7 +1,11 @@
 <template>
 	<layout-login>
 		<v-container>
-			<v-form @submit.prevent="submit" ref="form" v-model="valid">
+			<v-form 
+				@submit.prevent="submit" 
+				ref="form" 
+				v-model="valid"
+			>
 			<v-text-field
 				v-model="email"
 				:rules="emailRules"
@@ -26,7 +30,12 @@
 			</v-btn>
 			<v-btn @click="clear">clear</v-btn>
 		</v-form>
-		<v-alert :value="true" type="error" color="red" v-if="showMessage">
+		<v-alert 
+			:value="true" 
+			type="error" 
+			color="red" 
+			v-if="showMessage"
+			>
 				{{messageText}}
 			</v-alert>
 	</v-container>
@@ -73,7 +82,7 @@ async function submit() {
 		});
 		this.messageText = '';
 		localStorage.setItem('token', response.data.token);
-		localStorage.setItem('codigo', response.data.codeUser);
+		localStorage.setItem('code-user', response.data.codeUser);
 		this.$router.push({ name: 'Home' });
 	} catch (error) {
 		if (error.response.status === 405) {

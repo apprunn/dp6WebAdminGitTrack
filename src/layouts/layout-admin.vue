@@ -1,32 +1,33 @@
 <template>
- 	<v-container :fluid="true" pl-0 pt-0 pr-0 pb-0>
-		 <v-toolbar>
-				<v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-				<v-spacer></v-spacer>
-					<v-toolbar-items>
-						<v-btn flat>{{codigo}}</v-btn>
-					</v-toolbar-items>
-    	</v-toolbar>
-	 	<v-layout row wrap>
-		 	<v-flex xs7 md3>
-			 <v-navigation-drawer stateless value="true" class="blue lighten-3 height"  v-model="drawer">
-    			<v-list v-for="result in results" :key="result.id">
-			 			<v-list-group value="true">
-        			<v-list-tile slot="activator">
-								<img class="icon" :src="result.pathIcon">
-          			<v-list-tile-title>{{result.name}}</v-list-tile-title>
-        			</v-list-tile>
-       				<v-list-tile v-for="resultlist in result.resource.data" :key="resultlist.position">
-            		<v-list-tile-title class="sub-item" @click="option(resultlist.name)">{{resultlist.name}}</v-list-tile-title>
-	              <img :src="resultlist.iconUrl" class="icon">
-							</v-list-tile>
-      			</v-list-group>
-    			</v-list>
-  			</v-navigation-drawer>
-		 	</v-flex>
-			<slot></slot>
-	 	</v-layout>
- </v-container>
+  <v-container :fluid="true" pl-0 pt-0 pr-0 pb-0>
+    <v-toolbar>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <v-btn flat>{{codeUser}}</v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+    <v-navigation-drawer 
+			v-model="drawer" 
+			temporary
+			absolute
+			class="blue lighten-3"
+		>
+			<v-list v-for="result in results" :key="result.id">
+				<v-list-group value="true">
+					<v-list-tile slot="activator">
+						<img class="icon" :src="result.pathIcon">
+						<v-list-tile-title>{{result.name}}</v-list-tile-title>
+					</v-list-tile>
+					<v-list-tile v-for="resultlist in result.resource.data" :key="resultlist.position">
+						<v-list-tile-title class="sub-item" @click="option(resultlist.name)">{{resultlist.name}}</v-list-tile-title>
+						<img :src="resultlist.iconUrl" class="icon">
+					 </v-list-tile>
+					</v-list-group>
+			</v-list>
+     </v-navigation-drawer>
+		<slot></slot>
+  </v-container>
 </template>
 
 <script>
@@ -44,13 +45,17 @@ function option(value) {
 	if (value === 'Lista de desarrolladores') {
 		this.$router.push({ name: 'developers' });
 	}
+
+	if (value === 'Lista de proyectos') {
+		this.$router.push({ name: 'projects' });
+	}
 }
 
 function data() {
 	return {
 		results: [],
 		drawer: null,
-		codigo: localStorage.getItem('codigo'),
+		codeUser: localStorage.getItem('code-user'),
 	};
 }
 export default {
@@ -62,19 +67,3 @@ export default {
 	},
 };
 </script>
-
-<style lang="scss" scoped>
-  .height {
-		height: 100vh !important;
-	}
-
-	.icon {
-		height: 20px;
-		margin-right: 10px;
-		width: 20px;
-	}
-
-	.sub-item {
-		margin-left: 30px;
-	}
-</style>
