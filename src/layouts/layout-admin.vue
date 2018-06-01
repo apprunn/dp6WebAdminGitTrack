@@ -2,15 +2,15 @@
   <v-container :fluid="true" pl-0 pt-0 pr-0 pb-0>
     <v-toolbar>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-spacer></v-spacer>
-      <v-toolbar-items>
-        <v-btn flat>{{codeUser}}</v-btn>
-      </v-toolbar-items>
+        <v-spacer></v-spacer>
+        <v-toolbar-items>
+          <v-btn flat>{{codeUser}}</v-btn>
+      	</v-toolbar-items>
     </v-toolbar>
     <v-navigation-drawer 
 			v-model="drawer" 
-			temporary
-			absolute
+			temporary 
+			absolute 
 			class="blue lighten-3"
 		>
 			<v-list v-for="result in results" :key="result.id">
@@ -24,8 +24,8 @@
 						<img :src="resultlist.iconUrl" class="icon">
 					 </v-list-tile>
 					</v-list-group>
-			</v-list>
-     </v-navigation-drawer>
+			 </v-list>
+    </v-navigation-drawer>
 		<slot></slot>
   </v-container>
 </template>
