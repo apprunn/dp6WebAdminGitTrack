@@ -1,5 +1,10 @@
 <template>
 		<v-container :fluid="true" pl-0 pt-0 pr-0 pb-0>
+			<v-progress-linear
+    		v-model="value"
+    		:active="show"
+				class="progress"
+  		></v-progress-linear>
 			<v-flex xs5 sm6 offset-sm3>
 					<v-list-tile v-for="developer in developers" :key="developer.userId">
 						<v-list-tile-avatar>
@@ -15,17 +20,21 @@
 <script>
 
 async function created() {
+	this.show = true;
 	const urlDeveloper = 'developer';
 	const token = localStorage.getItem('token');
 	const responseDeveloper = await this.$http.get(urlDeveloper, {
 		headers: { Authorization: `Bearer ${token}` },
 	});
+	this.value = 100;
 	this.developers = responseDeveloper.data;
+	this.show = false;
 }
-
 function data() {
 	return {
 		developers: [],
+		show: false,
+		value: 0,
 	};
 }
 export default {
@@ -33,3 +42,10 @@ export default {
 	created,
 };
 </script>
+
+<style lang="scss" scoped>
+
+	.progress {
+		margin: 0 !important;
+	}
+</style>

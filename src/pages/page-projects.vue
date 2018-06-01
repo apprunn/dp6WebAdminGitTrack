@@ -1,4 +1,10 @@
 <template>
+<v-container :fluid="true" pl-0 pt-0 pr-0 pb-0>
+	<v-progress-linear
+    		v-model="value"
+    		:active="show"
+				class="progress"
+  	></v-progress-linear>
   <v-layout row>
     <v-flex xs12 sm6 offset-sm3>
 				<v-list-tile v-for="project in projects" :key="project.id" class="container">
@@ -10,22 +16,28 @@
 				</v-list-tile>
     </v-flex>
   </v-layout>
+	</v-container>
 </template>
 
 <script>
 
 async function created() {
+	this.show = true;
 	const urlProjects = 'projects-token';
 	const token = localStorage.getItem('token');
 	const responseProjects = await this.$http.get(urlProjects, {
 		headers: { Authorization: `Bearer ${token}` },
 	});
+	this.value = 100;
+	this.show = false;
 	this.projects = responseProjects.data;
 }
 
 function data() {
 	return {
 		projects: [],
+		show: false,
+		value: 0,
 	};
 }
 export default {
@@ -38,5 +50,9 @@ export default {
 	.container {
 		height: 80px !important;
 		padding: 0 !important;
+	}
+
+	.progress {
+		margin: 0 !important;
 	}
 </style>
