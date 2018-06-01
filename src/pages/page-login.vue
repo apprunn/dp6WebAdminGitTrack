@@ -35,7 +35,7 @@
 			type="error" 
 			color="red" 
 			v-if="showMessage"
-			>
+		>
 				{{messageText}}
 			</v-alert>
 	</v-container>
