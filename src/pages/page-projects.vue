@@ -3,7 +3,7 @@
     <v-flex xs12 sm6 offset-sm3>
 				<v-list-tile v-for="project in projects" :key="project.id" class="container">
 					<v-list-tile-content>
-            <v-list-tile-title>{{project.gitName}}</v-list-tile-title>
+            <v-list-tile-title @click="goToActivity($event)" :data-id="project.id">{{project.gitName}}</v-list-tile-title>
 						 <v-list-tile-sub-title>Activity Hours: {{project.activityHours}} h</v-list-tile-sub-title>
 						  <v-list-tile-sub-title>Milestone Hours: {{project.milestoneHours}} h</v-list-tile-sub-title>
 					</v-list-tile-content>
@@ -28,9 +28,18 @@ function data() {
 		projects: [],
 	};
 }
+
+function goToActivity(event) {
+	const id = event.currentTarget.getAttribute('data-id');
+	this.$router.push({ name: 'activity', params: { id } });
+}
 export default {
+	name: 'page-projects',
 	data,
 	created,
+	methods: {
+		goToActivity,
+	},
 };
 </script>
 
