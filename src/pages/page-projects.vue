@@ -51,6 +51,7 @@ export default {
 	}
 
 	.progress {
-		margin: 0 !important;
+		margin-top: -57px !important;
+    margin-bottom: 60px;
 	}
 </style>
