@@ -20,18 +20,41 @@ export default new Router({
 					path: '/developers',
 					name: 'developers',
 					component: pageDevelopers,
+					meta: {
+						breadcrumb: [
+							{ name: 'Home', link: '/' },
+							{ name: 'Developers', link: '/developers' },
+						],
+					},
 				},
 				{
 					path: '/projects',
 					name: 'projects',
 					component: pageProjects,
+					meta: {
+						breadcrumb: [
+							{ name: 'Home', link: '/' },
+							{ name: 'Project', link: '/projects' },
+						],
+					},
 				},
 				{
 					path: '/projects/:id/activity',
 					name: 'activity',
 					component: pageActivity,
+					meta: {
+						breadcrumb: [
+							{ name: 'Home', link: '/' },
+							{ name: 'Project', link: '/projects' },
+						],
+					},
 				},
 			],
+			meta: {
+				breadcrumb: [
+					{ name: 'Home', link: '/' },
+				],
+			},
 		},
 		{
 			path: '/login',
