@@ -2,13 +2,13 @@
  	<layout-admin>
 		 {{routes}}
 		  <v-breadcrumbs divider="/">
+		 	<v-breadcrumbs-item to="/">Home</v-breadcrumbs-item>
 			<v-breadcrumbs-item 
-         v-for="element in route"
-				 :key="element.name"
-				 :to="element.link"
-				 :disabled="false"
-			>
-        {{ element.name }}
+				 v-for="element in arrayRoutes"
+				 :key="element"
+				 :exact = true
+				 :to ="toRoutes(element)">
+        {{ nameRoutes(element) }}
       </v-breadcrumbs-item>
     </v-breadcrumbs>
 		 <router-view></router-view>
@@ -17,18 +17,47 @@
 
 <script>
 function routes() {
-	this.route = this.$route.meta.breadcrumb;
 	this.arrayRoutes = this.$route.path.slice(1).split('/');
-	this.arrayRoutes2 = this.$route.path.split('/');
-	console.log(this.route);
+	console.log(this.arrayRoutes);
+	console.log(isNaN(this.$route.params.id));
+}
+
+function nameRoutes(value) {
+	let name;
+	if (value === 'developers') {
+		name = 'Developers';
+	}
+	if (value === 'projects') {
+		name = 'Projects';
+	}
+
+	if (!isNaN(value) && this.arrayRoutes[0] === 'projects') {
+		name = this.$route.params.id;
+	}
+
+	return name;
+}
+
+function toRoutes(value) {
+	let route;
+	if (value === 'projects') {
+		route = '/projects';
+	}
+
+	if (value === 'developers') {
+		route = '/developers';
+	}
+
+	if (!isNaN(value) && this.arrayRoutes[0] === 'projects') {
+		route = `/projects/${this.$route.params.id}/activity`;
+	}
+
+	return route;
 }
 
 function data() {
 	return {
 		arrayRoutes: [],
-		arrayRoutes2: [],
-		bread: [],
-		route: null,
 	};
 }
 
@@ -37,6 +66,10 @@ export default {
 	data,
 	computed: {
 		routes,
+	},
+	methods: {
+		nameRoutes,
+		toRoutes,
 	},
 };
 </script>
