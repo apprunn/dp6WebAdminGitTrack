@@ -18,8 +18,6 @@
 <script>
 function routes() {
 	this.arrayRoutes = this.$route.path.slice(1).split('/');
-	console.log(this.arrayRoutes);
-	console.log(isNaN(this.$route.params.id));
 }
 
 function nameRoutes(value) {
