@@ -24,10 +24,7 @@
 async function created() {
 	this.show = true;
 	const urlProjects = 'projects-token';
-	const token = localStorage.getItem('token');
-	const responseProjects = await this.$http.get(urlProjects, {
-		headers: { Authorization: `Bearer ${token}` },
-	});
+	const responseProjects = await this.$http.get(urlProjects);
 	this.projects = responseProjects.data;
 	this.show = false;
 }
