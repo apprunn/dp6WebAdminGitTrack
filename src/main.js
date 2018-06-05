@@ -13,6 +13,7 @@ const instanceAcl = axios.create({
 
 const instance = axios.create({
 	baseURL: process.env.GIT_URL,
+	headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
 });
 
 Vue.use(Vuetify);

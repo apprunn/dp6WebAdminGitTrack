@@ -20,10 +20,7 @@
 
 	async function created() {
 		const urlActivity = `activities/milestone/${this.$route.params.id}`;
-		const token = localStorage.getItem('token');
-		const responseActivity = await this.$http.get(urlActivity, {
-			headers: { Authorization: `Bearer ${token}` },
-		});
+		const responseActivity = await this.$http.get(urlActivity);
 		this.activities = responseActivity.data;
 	}
 

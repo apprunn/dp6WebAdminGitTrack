@@ -22,10 +22,7 @@
 async function created() {
 	this.show = true;
 	const urlDeveloper = 'developer';
-	const token = localStorage.getItem('token');
-	const responseDeveloper = await this.$http.get(urlDeveloper, {
-		headers: { Authorization: `Bearer ${token}` },
-	});
+	const responseDeveloper = await this.$http.get(urlDeveloper);
 	this.developers = responseDeveloper.data;
 	this.show = false;
 }
