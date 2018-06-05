@@ -102,6 +102,7 @@ function clear() {
 
 
 export default {
+	name: 'page-login',
 	data,
 	components: {
 		layoutLogin,

@@ -36,6 +36,7 @@ function data() {
 	};
 }
 export default {
+	name: 'page-developers',
 	data,
 	created,
 };
