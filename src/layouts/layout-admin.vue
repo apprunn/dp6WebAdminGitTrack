@@ -25,7 +25,7 @@
 						<v-list-tile-title>{{result.name}}</v-list-tile-title>
 					</v-list-tile>
 					<v-list-tile v-for="resultlist in result.resource.data" :key="resultlist.position">
-						<v-list-tile-title class="sub-item" @click="option(resultlist.name)">{{resultlist.name}}</v-list-tile-title>
+						<router-link :to="{ name: resultlist.uri }">{{resultlist.name}}</router-link>
 						<img :src="resultlist.iconUrl" class="icon">
 					 </v-list-tile>
 					</v-list-group>
@@ -49,17 +49,6 @@ function sidebar() {
 	return this.$store.getters.sidebar;
 }
 
-
-function option(value) {
-	if (value === 'Lista de desarrolladores') {
-		this.$router.push({ name: 'developers' });
-	}
-
-	if (value === 'Lista de proyectos') {
-		this.$router.push({ name: 'projects' });
-	}
-}
-
 function data() {
 	return {
 		results: [],
@@ -74,9 +63,6 @@ export default {
 	computed: {
 		bar,
 		sidebar,
-	},
-	methods: {
-		option,
 	},
 };
 </script>
