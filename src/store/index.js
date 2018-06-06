@@ -9,10 +9,6 @@ const instance = axios.create({
 	headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
 });
 
-const instanceAcl = axios.create({
-	baseURL: process.env.ACL_URL,
-});
-
 const store = new Vuex.Store({
 	state: {
 		developers: [],
@@ -22,6 +18,10 @@ const store = new Vuex.Store({
 		developers(state) {
 			return state.developers;
 		},
+
+		token(state) {
+			return state.token;
+		},
 	},
 	actions: {
 		async fetchDevelopers({ commit }) {
@@ -30,25 +30,15 @@ const store = new Vuex.Store({
 		},
 
 		async fetchLogin({ commit }, payload) {
-			try {
-				const response = await instanceAcl.post('authenticate', {
-					email: payload.email,
-					password: payload.password,
-					codeApp: 'git',
-					tokenDevice: '',
-				});
-				this.$router.push({ name: 'Home' });
-				commit('setLogin', response.data.token);
-			} catch (error) {
-				console.log(error);
-			}
+			commit('setToken', payload);
 		},
 	},
 	mutations: {
 		setDevelopers(state, data) {
 			Vue.set(state, 'developers', data);
 		},
-		setLogin(state, data) {
+
+		setToken(state, data) {
 			Vue.set(state, 'token', data);
 		},
 	},
