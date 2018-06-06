@@ -40,10 +40,10 @@ const store = new Vuex.Store({
 	},
 	actions: {
 		async fetchDevelopers({ commit }) {
-			commit('setbarProgress', true);
+			commit('setBarProgress', true);
 			const responseDeveloper = await instance.get('developer');
 			commit('setDevelopers', responseDeveloper.data);
-			commit('setbarProgress', false);
+			commit('setBarProgress', false);
 		},
 
 		async fetchLogin({ commit }, payload) {
@@ -56,7 +56,7 @@ const store = new Vuex.Store({
 		},
 
 		barProgress({ commit }, payload) {
-			commit('setbarProgress', payload);
+			commit('setBarProgress', payload);
 		},
 	},
 	mutations: {
@@ -72,7 +72,7 @@ const store = new Vuex.Store({
 			Vue.set(state, 'sidebar', data);
 		},
 
-		setbarProgress(state, data) {
+		setBarProgress(state, data) {
 			Vue.set(state, 'bar', data);
 		},
 	},
