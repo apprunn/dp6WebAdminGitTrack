@@ -6,6 +6,7 @@ import 'normalize.css';
 import App from './App';
 import router from './router';
 import layoutAdmin from './layouts/layout-admin';
+import store from './store';
 
 const instanceAcl = axios.create({
 	baseURL: process.env.ACL_URL,
@@ -24,6 +25,7 @@ Vue.component('layout-admin', layoutAdmin);
 
 /* eslint-disable no-new */
 new Vue({
+	store,
 	el: '#app',
 	router,
 	render: h => h(App),

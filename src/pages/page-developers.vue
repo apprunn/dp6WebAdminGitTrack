@@ -5,7 +5,7 @@
     		:active="show"
 				class="progress"
   		></v-progress-linear>
-			<v-flex xs5 sm6 offset-sm3>
+			<v-flex xs12 sm6 offset-sm3>
 					<v-list-tile v-for="developer in developers" :key="developer.userId">
 						<v-list-tile-avatar>
 							<img :src="developer.avatarUrl">
@@ -19,16 +19,16 @@
 </template>
 <script>
 
-async function created() {
-	this.show = true;
-	const urlDeveloper = 'developer';
-	const responseDeveloper = await this.$http.get(urlDeveloper);
-	this.developers = responseDeveloper.data;
-	this.show = false;
+function created() {
+	this.$store.dispatch('fetchDevelopers');
 }
+
+function developers() {
+	return this.$store.getters.developers;
+}
+
 function data() {
 	return {
-		developers: [],
 		show: false,
 	};
 }
@@ -36,6 +36,9 @@ export default {
 	name: 'page-developers',
 	data,
 	created,
+	computed: {
+		developers,
+	},
 };
 </script>
 

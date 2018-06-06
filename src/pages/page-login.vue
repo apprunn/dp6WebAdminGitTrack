@@ -65,11 +65,9 @@ function data() {
 		],
 	};
 }
-
 function showMessage() {
 	return this.messageText.length > 0;
 }
-
 async function submit() {
 	this.loading = true;
 	const url = 'authenticate';
@@ -94,13 +92,10 @@ async function submit() {
 		this.loading = false;
 	}
 }
-
 function clear() {
 	this.$refs.form.reset();
 	this.messageText = '';
 }
-
-
 export default {
 	name: 'page-login',
 	data,
