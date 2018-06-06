@@ -11,7 +11,6 @@ const instance = axios.create({
 
 const instanceAcl = axios.create({
 	baseURL: process.env.ACL_URL,
-	headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
 });
 
 const store = new Vuex.Store({
