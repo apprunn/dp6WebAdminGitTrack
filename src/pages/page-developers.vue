@@ -1,10 +1,5 @@
 <template>
 		<v-container :fluid="true" pl-0 pt-0 pr-0 pb-0>
-			<v-progress-linear
-    	 	:indeterminate="true"
-    		:active="show"
-				class="progress"
-  		></v-progress-linear>
 			<v-flex xs12 sm6 offset-sm3>
 					<v-list-tile v-for="developer in developers" :key="developer.userId">
 						<v-list-tile-avatar>
@@ -27,14 +22,8 @@ function developers() {
 	return this.$store.getters.developers;
 }
 
-function data() {
-	return {
-		show: false,
-	};
-}
 export default {
 	name: 'page-developers',
-	data,
 	created,
 	computed: {
 		developers,

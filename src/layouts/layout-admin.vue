@@ -7,13 +7,18 @@
           <v-btn flat>{{codeUser}}</v-btn>
       	</v-toolbar-items>
     </v-toolbar>
+		<v-progress-linear
+    	 	:indeterminate="true"
+    		:active="bar"
+				class="progress"
+  	></v-progress-linear>
     <v-navigation-drawer 
 			v-model="drawer" 
 			temporary 
 			absolute 
 			class="blue lighten-3"
 		>
-			<v-list v-for="result in results" :key="result.id">
+			<v-list v-for="result in sidebar" :key="result.id">
 				<v-list-group value="true">
 					<v-list-tile slot="activator">
 						<img class="icon" :src="result.pathIcon">
@@ -33,13 +38,17 @@
 <script>
 
 async function created() {
-	const url = 'sidebar/git';
-	const token = localStorage.getItem('token');
-	const response = await this.$httpAcl.get(url, {
-		headers: { Authorization: `Bearer ${token}` },
-	});
-	this.results = response.data.data;
+	this.$store.dispatch('fetchSidebar');
 }
+
+function bar() {
+	return this.$store.getters.bar;
+}
+
+function sidebar() {
+	return this.$store.getters.sidebar;
+}
+
 
 function option(value) {
 	if (value === 'Lista de desarrolladores') {
@@ -62,8 +71,20 @@ export default {
 	name: 'layout-admin',
 	data,
 	created,
+	computed: {
+		bar,
+		sidebar,
+	},
 	methods: {
 		option,
 	},
 };
 </script>
+
+<style lang="scss" scoped>
+
+	.progress {
+		margin-top:0 !important;
+    margin-bottom: 20px;
+	}
+</style>

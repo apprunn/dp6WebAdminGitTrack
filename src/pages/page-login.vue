@@ -65,6 +65,7 @@ function data() {
 		],
 	};
 }
+
 function showMessage() {
 	return this.messageText.length > 0;
 }
@@ -80,19 +81,26 @@ async function submit() {
 			tokenDevice: '',
 		});
 		this.messageText = '';
-		localStorage.setItem('token', response.data.token);
+		this.$store.dispatch('fetchLogin', response.data.token);
 		localStorage.setItem('code-user', response.data.codeUser);
 		this.$router.push({ name: 'Home' });
 	} catch (error) {
-		this.messageText = error.response.data.message;
+		if (error.response.status === 405) {
+			this.messageText = error.response.data.message;
+		} else {
+			this.messageText = error.response.data.email[0];
+		}
 	} finally {
 		this.loading = false;
 	}
 }
+
 function clear() {
 	this.$refs.form.reset();
 	this.messageText = '';
 }
+
+
 export default {
 	name: 'page-login',
 	data,

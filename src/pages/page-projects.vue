@@ -1,10 +1,5 @@
 <template>
 <v-container :fluid="true" pl-0 pt-0 pr-0 pb-0>
-	<v-progress-linear
-    	  :indeterminate="true"
-    		:active="show"
-				class="progress"
-  	></v-progress-linear>
   <v-layout row>
     <v-flex xs12 sm6 offset-sm3>
 				<v-list-tile v-for="project in projects" :key="project.id" class="container">
@@ -22,17 +17,17 @@
 <script>
 
 async function created() {
+	this.$store.dispatch('barProgress', true);
 	this.show = true;
 	const urlProjects = 'projects-token';
 	const responseProjects = await this.$http.get(urlProjects);
 	this.projects = responseProjects.data;
-	this.show = false;
+	this.$store.dispatch('barProgress', false);
 }
 
 function data() {
 	return {
 		projects: [],
-		show: false,
 	};
 }
 
