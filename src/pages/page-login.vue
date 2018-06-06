@@ -81,15 +81,11 @@ async function submit() {
 			tokenDevice: '',
 		});
 		this.messageText = '';
-		localStorage.setItem('token', response.data.token);
+		this.$store.dispatch('fetchLogin', response.data.token);
 		localStorage.setItem('code-user', response.data.codeUser);
 		this.$router.push({ name: 'Home' });
 	} catch (error) {
-		if (error.response.status === 405) {
-			this.messageText = error.response.data.message;
-		} else {
-			this.messageText = error.response.data.email[0];
-		}
+		this.messageText = error.response.data.message;
 	} finally {
 		this.loading = false;
 	}

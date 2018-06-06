@@ -19,9 +19,11 @@
 	}
 
 	async function created() {
+		this.$store.dispatch('barProgress', true);
 		const urlActivity = `activities/milestone/${this.$route.params.id}`;
 		const responseActivity = await this.$http.get(urlActivity);
 		this.activities = responseActivity.data;
+		this.$store.dispatch('barProgress', false);
 	}
 
 	export default {
