@@ -82,6 +82,7 @@ async function submit() {
 		});
 		this.messageText = '';
 		this.$store.dispatch('fetchLogin', response.data.token);
+		localStorage.setItem('token', response.data.token);
 		localStorage.setItem('code-user', response.data.codeUser);
 		this.$router.push({ name: 'Home' });
 	} catch (error) {

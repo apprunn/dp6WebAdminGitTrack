@@ -50,8 +50,10 @@ const store = new Vuex.Store({
 			commit('setToken', payload);
 		},
 
-		async fetchSidebar({ commit }) {
-			const response = await instanceAcl.get('sidebar/git');
+		async fetchSidebar({ commit, state }) {
+			const response = await instanceAcl.get('sidebar/git', {
+				headers: { Authorization: `Bearer ${state.token}` },
+			});
 			commit('setSidebar', response.data.data);
 		},
 
