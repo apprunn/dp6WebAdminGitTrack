@@ -17,7 +17,7 @@ const instanceAcl = axios.create({
 const store = new Vuex.Store({
 	state: {
 		developers: [],
-		token: null,
+		token: localStorage.getItem('token'),
 		sidebar: [],
 		bar: false,
 	},
