@@ -14,25 +14,21 @@ const router = new Router({
 			path: '/',
 			name: 'Home',
 			component: pageHome,
-			meta: { requiresAuth: true },
 			children: [
 				{
 					path: '/developers',
 					name: 'developers',
 					component: pageDevelopers,
-					meta: { requiresAuth: true },
 				},
 				{
 					path: '/projects',
 					name: 'projects',
 					component: pageProjects,
-					meta: { requiresAuth: true },
 				},
 				{
 					path: '/projects/:id/activity',
 					name: 'activity',
 					component: pageActivity,
-					meta: { requiresAuth: true },
 				},
 			],
 		},
@@ -45,7 +41,9 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-	if (to.meta.requiresAuth) {
+	if (to.name === 'login') {
+		next();
+	} else {
 		const authUser = window.localStorage.getItem('token');
 		if (authUser) {
 			next();
@@ -53,7 +51,6 @@ router.beforeEach((to, from, next) => {
 			next({ name: 'login' });
 		}
 	}
-	next();
 });
 
 export default router;
