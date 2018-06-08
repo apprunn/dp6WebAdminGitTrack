@@ -38,9 +38,11 @@ const store = new Vuex.Store({
 		},
 	},
 	actions: {
-		async fetchDevelopers({ commit }) {
+		async fetchDevelopers({ commit, state }) {
 			commit('setBarProgress', true);
-			const responseDeveloper = await instance.get('developer');
+			const responseDeveloper = await instance.get('developer', {
+				headers: { Authorization: `Bearer ${state.token}` },
+			});
 			commit('setDevelopers', responseDeveloper.data);
 			commit('setBarProgress', false);
 		},
