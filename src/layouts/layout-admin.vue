@@ -25,7 +25,7 @@
 						<v-list-tile-title>{{result.name}}</v-list-tile-title>
 					</v-list-tile>
 					<v-list-tile v-for="resultlist in result.resource.data" :key="resultlist.position">
-						<router-link :to="goto(resultlist.uri)">{{resultlist.name}}</router-link>
+						<a @click.prevent="goTo(resultlist.uri)">{{resultlist.name}}</a>
 						<img :src="resultlist.iconUrl" class="icon">
 					 </v-list-tile>
 					</v-list-group>
@@ -57,8 +57,8 @@ function data() {
 	};
 }
 
-function goto(route) {
-	this.$router.push({ name: route });
+function goTo(value) {
+	this.$router.push({ name: value });
 }
 
 export default {
@@ -70,7 +70,7 @@ export default {
 		sidebar,
 	},
 	methods: {
-		goto,
+		goTo,
 	},
 };
 </script>
