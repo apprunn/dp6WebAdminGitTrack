@@ -25,7 +25,7 @@
 						<v-list-tile-title>{{result.name}}</v-list-tile-title>
 					</v-list-tile>
 					<v-list-tile v-for="resultlist in result.resource.data" :key="resultlist.position">
-						<router-link :to="{ name: resultlist.uri }">{{resultlist.name}}</router-link>
+						<router-link :to="goto(resultlist.uri)">{{resultlist.name}}</router-link>
 						<img :src="resultlist.iconUrl" class="icon">
 					 </v-list-tile>
 					</v-list-group>
@@ -56,6 +56,11 @@ function data() {
 		codeUser: localStorage.getItem('code-user'),
 	};
 }
+
+function goto(route) {
+	this.$router.push({ name: route });
+}
+
 export default {
 	name: 'layout-admin',
 	data,
@@ -63,6 +68,9 @@ export default {
 	computed: {
 		bar,
 		sidebar,
+	},
+	methods: {
+		goto,
 	},
 };
 </script>
