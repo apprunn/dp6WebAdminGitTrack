@@ -20,9 +20,7 @@ async function created() {
 	this.$store.dispatch('barProgress', true);
 	this.show = true;
 	const urlProjects = 'projects-token';
-	const responseProjects = await this.$http.get(urlProjects, {
-		headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-	});
+	const responseProjects = await this.$http.get(urlProjects);
 	this.projects = responseProjects.data;
 	this.$store.dispatch('barProgress', false);
 }
