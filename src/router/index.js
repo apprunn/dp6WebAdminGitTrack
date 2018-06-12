@@ -7,8 +7,7 @@ import pageProjects from '@/pages/page-projects';
 import pageActivity from '@/pages/page-activity';
 
 Vue.use(Router);
-
-export default new Router({
+const router = new Router({
 	mode: 'history',
 	routes: [
 		{
@@ -40,3 +39,19 @@ export default new Router({
 		},
 	],
 });
+
+router.beforeEach((to, from, next) => {
+	if (to.name === 'login') {
+		next();
+	} else {
+		const authUser = window.localStorage.getItem('token');
+		if (authUser) {
+			next();
+		} else {
+			next({ name: 'login' });
+		}
+	}
+});
+
+export default router;
+
