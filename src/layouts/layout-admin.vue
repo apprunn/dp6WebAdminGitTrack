@@ -25,7 +25,7 @@
 						<v-list-tile-title>{{result.name}}</v-list-tile-title>
 					</v-list-tile>
 					<v-list-tile v-for="resultlist in result.resource.data" :key="resultlist.position">
-						<v-list-tile-title class="sub-item" @click="option(resultlist.name)">{{resultlist.name}}</v-list-tile-title>
+						<a @click.prevent="goTo(resultlist.uri)">{{resultlist.name}}</a>
 						<img :src="resultlist.iconUrl" class="icon">
 					 </v-list-tile>
 					</v-list-group>
@@ -49,17 +49,6 @@ function sidebar() {
 	return this.$store.getters.sidebar;
 }
 
-
-function option(value) {
-	if (value === 'Lista de desarrolladores') {
-		this.$router.push({ name: 'developers' });
-	}
-
-	if (value === 'Lista de proyectos') {
-		this.$router.push({ name: 'projects' });
-	}
-}
-
 function data() {
 	return {
 		results: [],
@@ -67,6 +56,11 @@ function data() {
 		codeUser: localStorage.getItem('code-user'),
 	};
 }
+
+function goTo(value) {
+	this.$router.push({ name: value });
+}
+
 export default {
 	name: 'layout-admin',
 	data,
@@ -76,7 +70,7 @@ export default {
 		sidebar,
 	},
 	methods: {
-		option,
+		goTo,
 	},
 };
 </script>
