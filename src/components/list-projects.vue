@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-list-tile-content>
-      <v-list-tile-title  @click="goToActivity" :data-id="id">{{gitName}}</v-list-tile-title>
+      <v-list-tile-title  @click="goToActivity" :data-id="id" class="title-component">{{gitName}}</v-list-tile-title>
 		  <v-list-tile-sub-title>Activity Hours: {{activityHours}} h</v-list-tile-sub-title>
 			<v-list-tile-sub-title>Milestone Hours: {{milestoneHours}} h</v-list-tile-sub-title>
 		</v-list-tile-content>
@@ -36,5 +36,6 @@ export default {
 	},
 };
 </script>
+
 
 
