@@ -50,7 +50,7 @@
 						</v-btn>
 						<v-btn
 							@click="clear"
-							class="login-btn warning mb-5"
+							class="login-btn warning mb-3"
 							block
 						>
 							Ingresar con GitHub
