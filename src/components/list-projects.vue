@@ -1,24 +1,23 @@
 <template>
   <v-layout>
-    <!-- <v-list-tile-content class="container-project">
-      <v-list-tile-title  @click="goToActivity" :data-id="id" class="title-component">{{gitName}}</v-list-tile-title>
-		  <v-list-tile-sub-title>Activity Hours: {{activityHours}} h</v-list-tile-sub-title>
-			<v-list-tile-sub-title>Milestone Hours: {{milestoneHours}} h</v-list-tile-sub-title>
-		</v-list-tile-content> -->
 		<v-container class="container-project">
 			<h4 class="title-card color-blue padding">{{gitName}}</h4>
 			<div>
 				<ul class="padding ul-project">
-				<li>GDS</li>
-				<li>Clerkin</li>
-				<li>FeddBackin</li>
+				<li class="list">
+          <span v-html="list"></span>
+				</li>
 			</ul>
-			<div class="container-details  padding">
-				<p class="week-card">Semana: 04/07 al 09/07</p>
-				<p class="week-card">Total de Horas Generadas</p>
-				<v-icon color="green">timer</v-icon>
-				<span class="time-card">80.75/120 Hrs.</span>
-			</div>
+				<div class="container-details  padding">
+					<p class="week-card">Semana: {{milestoneDateStart}} al {{milestoneDateEnd}}</p>
+					<p class="week-card">Total de Horas Generadas</p>
+					<v-icon color="green">timer</v-icon>
+					<span class="time-card">{{activityHours}}/{{milestoneHours}} Hrs.</span>
+				</div>
+				<div class="container-button">
+					<v-btn class="button btn-green"  @click="goToDashboard">Dashboard</v-btn>
+					<v-btn class="button btn-orange"  @click="goToActivity" :data-id="id" >Actividades</v-btn>
+				</div>
 			</div>	
 		</v-container>	
   </v-layout>
@@ -30,6 +29,10 @@ function goToActivity() {
 	this.$emit('goToActivity', this.id);
 }
 
+function goToDashboard() {
+	this.$emit('goToDashboard');
+}
+
 export default {
 	name: 'list-projects',
 	props: {
@@ -38,7 +41,6 @@ export default {
 		},
 		activityHours: {
 			type: Number,
-			default: 198,
 		},
 		milestoneHours: {
 			type: Number,
@@ -46,18 +48,29 @@ export default {
 		id: {
 			type: Number,
 		},
+		list: {
+			type: String,
+		},
+		milestoneDateStart: {
+			type: String,
+		},
+		milestoneDateEnd: {
+			type: String,
+		},
 	},
 	methods: {
 		goToActivity,
+		goToDashboard,
 	},
 };
 </script>
 
 <style lang="scss" scoped>
 	.container-project {
-		height: 202px;
-		outline: 1px solid red;
+		background: map-get($colors, white);
 		margin: 10px;
+		min-height: 215px;
+		outline: 1px solid map-get($colors, header-blue);	
 		padding: 0px;
 	}
 
@@ -78,14 +91,27 @@ export default {
 
 	.ul-project {
 		display: inline-block;
+		min-height: 95px;
 		width: 50%;
 	}
 
 	.container-details {
-		display:inline-block;
-		width: 45%;
-		position: absolute;
 		border-left: 1px solid #dae2ea;
+		display:inline-block;
+		position: absolute;
+		width: 45%;
+	}
+
+	.container-button {
+		background: map-get($colors, container-color);
+		height: 48px;
+		margin-top:50px;
+		text-align: center;
+	}
+
+	.list {
+		color: map-get($colors, color-letter);
+		white-space: pre-line;
 	}
 
 </style>

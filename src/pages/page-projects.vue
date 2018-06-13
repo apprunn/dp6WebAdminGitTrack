@@ -1,5 +1,5 @@
 <template>
-<v-container :fluid="true" pl-0 pt-0 pr-0 pb-0>
+<v-container :fluid="true" pl-0 pt-0 pr-0 pb-0 class="background-container">
 	<v-layout row class="container-search">
 		<v-flex xs6 offset-xs5>
 			<v-container>
@@ -15,7 +15,7 @@
 	</v-layout>	
 	<v-layout row>
 		<v-flex xs4 offset-xs8>
-				<v-btn class="button btn-green">Agregar</v-btn>
+				<v-btn class="button btn-green background-container">Agregar</v-btn>
 		</v-flex>
 	</v-layout>
   <v-layout row v-for="project in projects" :key="project.id">
@@ -25,7 +25,11 @@
 				:activityHours="project.activityHours"
 				:milestoneHours="project.milestoneHours"
 				:id="project.id"
+				:list="project.gitBody"
+				:milestoneDateStart="project.milestoneDateStart"
+				:milestoneDateEnd="project.milestoneDateEnd"
 				v-on:goToActivity ="goToActivity"
+				v-on:goToDashboard ="goToDashboard"
 			 ></list-projects>
     </v-flex>
   </v-layout>
@@ -34,6 +38,7 @@
 
 <script>
 
+import { format } from 'date-fns';
 import listProjects from '../components/list-projects';
 
 async function created() {
@@ -41,7 +46,12 @@ async function created() {
 	this.show = true;
 	const urlProjects = 'projects-token';
 	const responseProjects = await this.$http.get(urlProjects);
-	this.projects = responseProjects.data;
+	this.projects = responseProjects.data.map((project) => {
+		const newProject = { ...project };
+		newProject.milestoneDateStart = format(newProject.milestoneDateStart, 'YYYY-MM-DD');
+		newProject.milestoneDateEnd = format(newProject.milestoneDateEnd, 'YYYY-MM-DD');
+		return newProject;
+	});
 	this.$store.dispatch('barProgress', false);
 }
 
@@ -51,8 +61,13 @@ function data() {
 	};
 }
 
+
 function goToActivity(id) {
 	this.$router.push({ name: 'activity', params: { id } });
+}
+
+function goToDashboard() {
+	this.$router.push({ name: 'Home' });
 }
 export default {
 	name: 'page-projects',
@@ -60,6 +75,7 @@ export default {
 	created,
 	methods: {
 		goToActivity,
+		goToDashboard,
 	},
 	components: {
 		listProjects,
@@ -69,13 +85,12 @@ export default {
 
 <style lang="scss" scoped>
 	.container {
-		height: 202px !important;
 		padding: 0 !important;
 	}
 
 	.progress {
+		margin-bottom: 60px;
 		margin-top: -57px !important;
-    margin-bottom: 60px;
 	}
 
 	.container-search {
@@ -85,12 +100,16 @@ export default {
 	}
 
 	.search {
-		border-radius: 50px;
 		background: map-get($colors, search);
+		border-radius: 50px;
 		box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.2);
 		height: 30px;
-	  padding: 2px 10px;
 		margin-top:13px;
+	  padding: 2px 10px;
+	}
+
+	.background-container {
+		background: map-get($colors, white) !important;
 	}
 
 </style>
