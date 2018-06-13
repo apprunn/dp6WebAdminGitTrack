@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
+import Vuelidate from 'vuelidate';
 import axios from 'axios';
 import 'normalize.css';
 import App from './App';
@@ -18,8 +19,10 @@ const instance = axios.create({
 });
 
 Vue.use(Vuetify);
+Vue.use(Vuelidate);
 Vue.prototype.$httpAcl = instanceAcl;
 Vue.prototype.$http = instance;
+Vue.prototype.$s3Url = 'https://s3.amazonaws.com/runtrack';
 Vue.config.productionTip = false;
 Vue.component('layout-admin', layoutAdmin);
 
