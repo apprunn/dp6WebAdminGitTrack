@@ -26,11 +26,11 @@
 <script>
 
 function goToActivity() {
-	this.$emit('goToActivity', this.id);
+	this.$emit('go-to-activity', this.id);
 }
 
 function goToDashboard() {
-	this.$emit('goToDashboard');
+	this.$emit('go-to-dashboard');
 }
 
 export default {

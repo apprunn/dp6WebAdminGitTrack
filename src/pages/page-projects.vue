@@ -21,15 +21,15 @@
   <v-layout row v-for="project in projects" :key="project.id">
     <v-flex xs12 sm6 offset-sm3>
 			<list-projects
-				:gitName="project.gitName"
-				:activityHours="project.activityHours"
-				:milestoneHours="project.milestoneHours"
+				:git-name="project.gitName"
+				:activity-hours="project.activityHours"
+				:milestone-hours="project.milestoneHours"
 				:id="project.id"
 				:list="project.gitBody"
-				:milestoneDateStart="project.milestoneDateStart"
-				:milestoneDateEnd="project.milestoneDateEnd"
-				v-on:goToActivity ="goToActivity"
-				v-on:goToDashboard ="goToDashboard"
+				:milestone-date-start="project.milestoneDateStart"
+				:milestone-date-end="project.milestoneDateEnd"
+				v-on:go-to-activity ="goToActivity"
+				v-on:go-to-dashboard ="goToDashboard"
 			 ></list-projects>
     </v-flex>
   </v-layout>
