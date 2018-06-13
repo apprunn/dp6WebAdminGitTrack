@@ -49,7 +49,6 @@
 							Ingresar
 						</v-btn>
 						<v-btn
-							@click="clear"
 							class="login-btn warning mb-3"
 							block
 						>
@@ -228,12 +227,17 @@ export default {
 
 			&.green {
 				border: 1px solid map-get($colors, button-green);
-				color: map-get($colors, button-green);
+				color: map-get($colors, button-green) !important;
 			}
 
 			&.warning {
 				border: 1px solid map-get($colors, button-orange);
-				color: map-get($colors, button-orange);
+				color: map-get($colors, button-orange) !important;
+			}
+
+			&.v-btn.v-btn--disabled:not(.v-btn--icon):not(.v-btn--flat) {
+				background-color: transparent !important;
+				opacity: .5;
 			}
 		}
 
