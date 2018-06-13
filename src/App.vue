@@ -35,6 +35,14 @@ export default {
 			font-size: 12px;
 	}
 
+	.btn-red {
+			border:1px solid map-get($colors, button-red);
+		  color:map-get($colors, button-red) !important;
+			font-family: 'D-DIN';
+			font-size: 12px;
+	}
+
+
 	.title-component {
 		color: map-get($colors, color-letter);
 		font-family: 'D-DINCondensed';
@@ -71,6 +79,11 @@ export default {
 		padding-top: 0px;
     width: 316px !important; 
 		-webkit-box-shadow: 0px 0px 5px 0px #000000 !important;
+	}
+
+	.tabs__item, .tabs__item--active {
+			font-family: 'D-DIN';
+			font-size: 12px;		
 	}
 
 
