@@ -55,8 +55,8 @@ export default {
   }
 
   .btn-check {
+		margin-left: 70px;
     margin-top:-5px;
-    margin-left: 70px;
     position: absolute;
   }
 
@@ -66,19 +66,18 @@ export default {
 		font-family: 'D-DIN';
 		font-size: 10px;
 		padding: 5px;
-	
 	}
 
 	.image {
-		width: 25px;
 		height: 25px;
 		margin-right: 5px;
+		width: 25px;
 	}
 
 	.container-details {
-		height: 40px;
-		display: flex;
 		align-items: center;
+		display: flex;
+		height: 40px;
 	}
 
 	.container-repo {
@@ -86,9 +85,9 @@ export default {
 	}
 
 	.time {
+		color: map-get($colors, button-green);
 		font-family: 'D-DIN';		
 		font-size: 14px;
-		color: map-get($colors, button-green);
 		margin-left: 5px;
 	}
 </style>

@@ -10,18 +10,15 @@
 					</v-tab>
 					<v-tabs-items>
 						<v-tab-item v-for="(item, index) in items" :key="item">
-							<v-layout v-for="(activity, element) in activities" :key="activity.id" v-if="showActivity(index)">
-								<v-flex xs12>
+								<v-flex xs12 v-for="activity in activities" :key="activity.id" v-if="showActivity(index)" class="background">
 									<list-activity
 											:git-name="activity.gitName"
 											:git-repo-name="activity.gitRepoName"
 											:url-image="activity.assignees[0].avatar_url"
 											:time-estimated="activity.timeEstimated"
-											v-on:go-to-edit="goToEdit"
-											:class="background(element)"
+											@go-to-edit="goToEdit"
 									></list-activity>
 								</v-flex>
-							</v-layout>
 						</v-tab-item>
 					</v-tabs-items>		
 				</v-tabs>
@@ -64,13 +61,6 @@
 		this.$router.push({ name: 'edit' });
 	}
 
-	function background(index) {
-		let value;
-		if (index % 2 === 0) {
-			value = 'back-odd ';
-		}
-		return value;
-	}
 
 	export default {
 		name: 'page-activity',
@@ -78,9 +68,8 @@
 			listActivity,
 		},
 		methods: {
-			showActivity,
 			goToEdit,
-			background,
+			showActivity,
 		},
 		created,
 		data,
@@ -89,13 +78,13 @@
 </script>
 
 <style lang="scss" scoped>
- .back-odd {
+ .container-back {
 	 background: map-get($colors, container-color);
+	 text-align: center;
  }
 
- .container-back {
+ .background:nth-child(odd) {
 	  background: map-get($colors, container-color);
-	 	text-align: center;
  }
 
 </style>
