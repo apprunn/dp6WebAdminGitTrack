@@ -1,16 +1,36 @@
 <template>
-<v-container :fluid="true" pl-0 pt-0 pr-0 pb-0>
-  <v-layout row>
+<v-container :fluid="true" pa-0 class="background-container">
+	<v-layout row class="container-search">
+		<v-flex xs6 offset-xs5>
+			<v-container>
+				<v-text-field
+				  prepend-icon="search"
+					hide-details
+					 class="search"
+					 placeholder="Buscar"
+					 single-line
+				></v-text-field>		 
+			</v-container>		
+		</v-flex>	
+	</v-layout>	
+	<v-layout row>
+		<v-flex xs4 offset-xs8>
+				<v-btn class="button btn-green background-container">Agregar</v-btn>
+		</v-flex>
+	</v-layout>
+  <v-layout row v-for="project in projects" :key="project.id">
     <v-flex xs12 sm6 offset-sm3>
-				<v-list-tile v-for="project in projects" :key="project.id" class="container">
-					 <list-projects
-							:gitName="project.gitName"
-							:activityHours="project.activityHours"
-							:milestoneHours="project.milestoneHours"
-							:id="project.id"
-							v-on:goToActivity ="goToActivity"
-					 ></list-projects>
-				</v-list-tile>
+			<list-projects
+				:git-name="project.gitName"
+				:activity-hours="project.activityHours"
+				:milestone-hours="project.milestoneHours"
+				:id="project.id"
+				:list="project.gitBody"
+				:milestone-date-start="project.milestoneDateStart"
+				:milestone-date-end="project.milestoneDateEnd"
+				@go-to-activity ="goToActivity"
+				@go-to-dashboard ="goToDashboard"
+			 ></list-projects>
     </v-flex>
   </v-layout>
 	</v-container>
@@ -18,6 +38,7 @@
 
 <script>
 
+import { format } from 'date-fns';
 import listProjects from '../components/list-projects';
 
 async function created() {
@@ -25,7 +46,12 @@ async function created() {
 	this.show = true;
 	const urlProjects = 'projects-token';
 	const responseProjects = await this.$http.get(urlProjects);
-	this.projects = responseProjects.data;
+	this.projects = responseProjects.data.map((project) => {
+		const newProject = { ...project };
+		newProject.milestoneDateStart = format(newProject.milestoneDateStart, 'YYYY-MM-DD');
+		newProject.milestoneDateEnd = format(newProject.milestoneDateEnd, 'YYYY-MM-DD');
+		return newProject;
+	});
 	this.$store.dispatch('barProgress', false);
 }
 
@@ -35,8 +61,13 @@ function data() {
 	};
 }
 
+
 function goToActivity(id) {
 	this.$router.push({ name: 'activity', params: { id } });
+}
+
+function goToDashboard() {
+	this.$router.push({ name: 'Home' });
 }
 export default {
 	name: 'page-projects',
@@ -44,6 +75,7 @@ export default {
 	created,
 	methods: {
 		goToActivity,
+		goToDashboard,
 	},
 	components: {
 		listProjects,
@@ -53,13 +85,32 @@ export default {
 
 <style lang="scss" scoped>
 	.container {
-		height: 80px !important;
 		padding: 0 !important;
 	}
 
 	.progress {
+		margin-bottom: 60px;
 		margin-top: -57px !important;
-    margin-bottom: 60px;
 	}
+
+	.container-search {
+		background: map-get($colors, container-search);
+		height: 57px;
+		margin-bottom: 10px;
+	}
+
+	.search {
+		background: map-get($colors, search);
+		border-radius: 50px;
+		box-shadow: inset 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+		height: 30px;
+		margin-top:13px;
+	  padding: 2px 10px;
+	}
+
+	.background-container {
+		background: map-get($colors, white) !important;
+	}
+
 </style>
 

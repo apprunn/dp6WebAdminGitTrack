@@ -1,7 +1,7 @@
 <template>
- 	<layout-admin>
+ 	<layout-admin class="background-container">
 		 {{routes}}
-		  <v-breadcrumbs divider="/">
+		  <v-breadcrumbs divider="/" class="breadcrumbs">
 		 	<v-breadcrumbs-item to="/">Home</v-breadcrumbs-item>
 			<v-breadcrumbs-item 
 				 v-for="element in arrayRoutes"
@@ -71,3 +71,14 @@ export default {
 	},
 };
 </script>
+
+<style lang="scss" scoped>
+
+  .background-container {
+		background: map-get($colors, white) !important;
+	}
+
+	.breadcrumbs {
+		padding: 12px;
+	}
+</style>

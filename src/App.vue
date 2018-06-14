@@ -73,6 +73,10 @@ export default {
 		-webkit-box-shadow: 0px 0px 5px 0px #000000 !important;
 	}
 
+	.input-group__details::before {
+		content:none;
+	}
+
 .login {
 	&-input {
 		label,
