@@ -12,7 +12,7 @@ export default {
 
 <style lang="scss">
 	html {
-		font-family: 'Roboto';
+		font-family: map-get($fonts, regular);
 		font-size: 20px;
 	}
 
@@ -77,5 +77,17 @@ export default {
 		content:none;
 	}
 
+.login {
+	&-input {
+		label,
+		input,
+		.v-icon {
+			color: map-get($colors, white) !important;
+		}
 
+		.v-input__slot:before {
+			content: none;
+		}
+	}
+}
 </style>
