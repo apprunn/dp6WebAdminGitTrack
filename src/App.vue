@@ -84,6 +84,8 @@ export default {
 	.tabs__item, .tabs__item--active {
 			font-family: 'D-DIN';
 			font-size: 12px;		
+	.input-group__details::before {
+		content:none;
 	}
 
 .login {
@@ -98,5 +100,6 @@ export default {
 			content: none;
 		}
 	}
+}
 }
 </style>
