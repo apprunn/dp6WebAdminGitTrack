@@ -1,5 +1,5 @@
 <template>
-<v-container :fluid="true" pl-0 pt-0 pr-0 pb-0 class="background-container">
+<v-container :fluid="true" pa-0 class="background-container">
 	<v-layout row class="container-search">
 		<v-flex xs6 offset-xs5>
 			<v-container>
@@ -28,8 +28,8 @@
 				:list="project.gitBody"
 				:milestone-date-start="project.milestoneDateStart"
 				:milestone-date-end="project.milestoneDateEnd"
-				v-on:go-to-activity ="goToActivity"
-				v-on:go-to-dashboard ="goToDashboard"
+				@go-to-activity ="goToActivity"
+				@go-to-dashboard ="goToDashboard"
 			 ></list-projects>
     </v-flex>
   </v-layout>
