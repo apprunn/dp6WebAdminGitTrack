@@ -35,6 +35,13 @@ export default {
 			font-size: 12px;
 	}
 
+	.btn-red {
+			border:1px solid map-get($colors, button-red);
+		  color:map-get($colors, button-red) !important;
+			font-family: 'D-DIN';
+			font-size: 12px;
+	}
+
 	.title-component {
 		color: map-get($colors, color-letter);
 		font-family: 'D-DINCondensed';
@@ -89,5 +96,27 @@ export default {
 			content: none;
 		}
 	}
+}
+
+.v-text-field.v-text-field--solo .v-input__control {
+    min-height: 38px;
+}
+
+.v-text-field.v-text-field--solo {
+	  border: 2px solid  map-get($colors, border-select);
+    box-shadow: none;
+    border-radius: 5px;
+}
+
+.v-text-field.v-text-field--solo .v-input__append-inner {
+    border-left: 1px solid map-get($colors, border-select);
+    height: 30px;
+    padding-top: 3px;
+}
+
+.v-text-field.v-text-field--solo .v-label {
+    color: solid map-get($colors, disabled-tab);
+		font-family: 'D-DIN';		
+		font-size: 14px;
 }
 </style>
