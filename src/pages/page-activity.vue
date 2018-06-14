@@ -10,7 +10,8 @@
 					</v-tab>
 					<v-tabs-items>
 						<v-tab-item v-for="(item, index) in items" :key="item">
-								<v-flex xs12 v-for="activity in activities" :key="activity.id" v-if="showActivity(index)" class="background">
+							<v-layout row wrap v-if="showActivity(index)">
+								<v-flex xs12 v-for="activity in activities" :key="activity.id" class="background">
 									<list-activity
 											:git-name="activity.gitName"
 											:git-repo-name="activity.gitRepoName"
@@ -19,6 +20,7 @@
 											@go-to-edit="goToEdit"
 									></list-activity>
 								</v-flex>
+							</v-layout>	
 						</v-tab-item>
 					</v-tabs-items>		
 				</v-tabs>
