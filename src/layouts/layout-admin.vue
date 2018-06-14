@@ -78,8 +78,8 @@ export default {
 <style lang="scss" scoped>
 
 	.progress {
+		margin-bottom: 20px;
 		margin-top:0 !important;
-    margin-bottom: 20px;
 	}
 
 	.back-white {
