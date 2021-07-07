@@ -1,5 +1,5 @@
 <template>
-  <v-container :fluid="true" pl-0 pt-0 pr-0 pb-0>
+  <v-container :fluid="true" pl-0 pt-0 pr-0 pb-0 class="back-white">
     <v-toolbar>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <v-spacer></v-spacer>
@@ -78,7 +78,11 @@ export default {
 <style lang="scss" scoped>
 
 	.progress {
+		margin-bottom: 20px;
 		margin-top:0 !important;
-    margin-bottom: 20px;
+	}
+
+	.back-white {
+		background: map-get($colors, white);
 	}
 </style>
