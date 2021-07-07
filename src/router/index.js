@@ -5,6 +5,7 @@ import pageLogin from '@/pages/page-login';
 import pageDevelopers from '@/pages/page-developers';
 import pageProjects from '@/pages/page-projects';
 import pageActivity from '@/pages/page-activity';
+import pageEdit from '@/pages/page-edit-activity';
 
 Vue.use(Router);
 const router = new Router({
@@ -29,6 +30,11 @@ const router = new Router({
 					path: '/projects/:id/activity',
 					name: 'activity',
 					component: pageActivity,
+				},
+				{
+					path: '/edit',
+					name: 'edit',
+					component: pageEdit,
 				},
 			],
 		},
